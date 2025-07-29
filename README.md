@@ -37,6 +37,7 @@ Una aplicación web moderna construida con **Astro**, **React** y **Tailwind CSS
 - [Tailwind CSS](https://tailwindcss.com/) - Framework de CSS
 - [shadcn/ui](https://ui.shadcn.com/) - Componentes UI
 - [Framer Motion](https://www.framer.com/motion/) - Animaciones
+- [React Bits](https://www.reactbits.dev/) - Componentes UI
 
 ## 🚀 Instalación y Configuración
 
@@ -99,7 +100,7 @@ FnaticDeTemu/
 ## 🎨 Componentes Principales
 
 ### **ResizableExample.jsx**
-Layout principal con tres paneles:
+Layout principal de Shadcn/UI con tres paneles:
 - **Superior**: Carousel de banners (35%)
 - **Inferior izquierdo**: Información del equipo (50%)  
 - **Inferior derecho**: Galería de integrantes (50%)
@@ -123,14 +124,14 @@ const items = [
 ```
 
 ### **Masonry.jsx** 
-Galería interactiva con:
+Galería interactiva de React Bits con:
 - Disposición tipo Pinterest
 - Hover effects con escalado
 - Soporte para texto superpuesto
 - Transiciones suaves
 
 ### **Carousel**
-Banner rotativo con:
+Banner rotativo de Shadcn/UI con:
 - Navegación con flechas
 - Imágenes de campeones de LoL
 - Controles centrados
