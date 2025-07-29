@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "src/pages/api/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "buildCommand": "npm ci && npm run build",
+  "installCommand": "npm ci",
+  "framework": "astro"
+}
