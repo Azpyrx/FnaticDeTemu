@@ -1,10 +1,7 @@
 {
   "functions": {
-    "src/pages/api/*.js": {
-      "runtime": "nodejs18.x"
+    "api/*.php": {
+      "runtime": "vercel-php@0.6.0"
     }
-  },
-  "buildCommand": "npm ci && npm run build",
-  "installCommand": "npm ci",
-  "framework": "astro"
+  }
 }
