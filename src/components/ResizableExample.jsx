@@ -86,14 +86,14 @@ export default function Example() {
               <CarouselContent className="h-full">
                 <CarouselItem className="h-full">
                   <img
-                    src="public/Ashe.jpg"
+                    src="/Ashe.jpg"
                     alt="Ashe"
                     className="w-full h-full object-cover" />
                 </CarouselItem>
                 <CarouselItem className="h-full">
                   <div className="h-full">
                     <img
-                      src="public/Tryndamere.webp"
+                      src="/Tryndamere.webp"
                       alt="Tryndamere"
                       className="w-full h-full object-cover" />
                   </div>
@@ -101,7 +101,7 @@ export default function Example() {
                 <CarouselItem className="h-full">
                   <div className="h-full">
                     <img
-                      src="public/jinx.jpg"
+                      src="/Jinx.jpg"
                       alt="Jinx"
                       className="w-full h-full object-cover" />
                   </div>
