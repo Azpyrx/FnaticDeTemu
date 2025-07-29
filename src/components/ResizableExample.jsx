@@ -16,31 +16,61 @@ const items = [
   {
     id: "1",
     img: "https://preview.redd.it/vs4nqxqekxw31.png?auto=webp&s=d63485c8b4723928cae1228dc8aa33602cbd92c6",
-    height: 400,
+    height: 250,
+    playerInfo: {
+      name: "Azpy#1337",
+      role: "ADC",
+      rank: "Diamond IV",
+      description: "ADC de la academia que solo juega Smolder"
+    }
   },
   {
     id: "2",
     img: "https://picsum.photos/id/1011/600/750?grayscale",
     url: "https://example.com/two",
     height: 250,
+    playerInfo: {
+      name: "ShadowJungle",
+      role: "Jungle",
+      rank: "Platinum I",
+      description: "Especialista en objetivos y ganks"
+    }
   },
   {
     id: "3",
     img: "https://picsum.photos/id/1020/600/800?grayscale",
     url: "https://example.com/three",
     height: 600,
+    playerInfo: {
+      name: "MidLaneKing",
+      role: "Mid",
+      rank: "Diamond III",
+      description: "Carry del equipo y roamer"
+    }
   },
   {
     id: "4",
     img: "https://picsum.photos/id/1018/600/400?grayscale",
     url: "https://example.com/four",
     height: 300,
+    playerInfo: {
+      name: "TopTank",
+      role: "Top",
+      rank: "Platinum II",
+      description: "Tanque principal y engager"
+    }
   },
   {
     id: "5",
     img: "https://picsum.photos/id/1025/600/700?grayscale",
     url: "https://example.com/five",
     height: 500,
+    playerInfo: {
+      name: "SupportGod",
+      role: "Support",
+      rank: "Diamond I",
+      description: "Visionado y protección del equipo"
+    }
   }
 ]
 

@@ -74,25 +74,85 @@ export default function Masonry({
     return <div>No hay imágenes para mostrar</div>;
   }
 
+  // Función para obtener el color del rol
+  const getRoleColor = (role) => {
+    const colors = {
+      ADC: "bg-red-500",
+      Support: "bg-green-500",
+      Mid: "bg-blue-500",
+      Jungle: "bg-purple-500",
+      Top: "bg-orange-500",
+    };
+    return colors[role] || "bg-gray-500";
+  };
+
   return (
-    <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
+    <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
       {items.map((item) => (
         <div
           key={item.id}
-          className="break-inside-avoid rounded-lg overflow-hidden shadow-md cursor-pointer transform transition-all duration-300 hover:scale-105 mb-4"
+          className="break-inside-avoid rounded-lg overflow-hidden shadow-md cursor-pointer transform transition-all duration-300 hover:scale-105 mb-4 relative group"
           onMouseEnter={() => setHoveredId(item.id)}
           onMouseLeave={() => setHoveredId(null)}
+          style={{
+            transform:
+              scaleOnHover && hoveredId === item.id
+                ? `scale(${hoverScale})`
+                : "scale(1)",
+          }}
         >
-          <img
-            src={item.img}
-            alt={`Item ${item.id}`}
-            className="w-full h-auto object-cover"
-            loading="lazy"
-            onError={(e) => {
-              console.log("Error cargando imagen:", item.img);
-              e.target.src = "https://via.placeholder.com/400x300?text=Error";
-            }}
-          />
+          <div className="relative">
+            <img
+              src={item.img}
+              alt={item.playerInfo?.name || `Item ${item.id}`}
+              className="w-full h-auto object-cover transition-all duration-300"
+              style={{ height: `${item.height}px` }}
+            />
+
+            {/* Overlay con información del jugador */}
+            {item.playerInfo && (
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-4">
+                <div className="text-center text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  {/* Nombre del jugador */}
+                  <h3 className="text-xl font-bold mb-2 text-yellow-300">
+                    {item.playerInfo.name}
+                  </h3>
+
+                  {/* Rol con color */}
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <span
+                      className={`text-xs px-3 py-1 rounded-full text-white font-semibold ${getRoleColor(
+                        item.playerInfo.role
+                      )}`}
+                    >
+                      {item.playerInfo.role}
+                    </span>
+                    <span className="text-xs bg-gray-600 px-2 py-1 rounded text-gray-200">
+                      {item.playerInfo.rank}
+                    </span>
+                  </div>
+
+                  {/* Descripción */}
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    {item.playerInfo.description}
+                  </p>
+
+                  {/* Icono decorativo */}
+                  <div className="mt-3 text-2xl">⚔️</div>
+                </div>
+              </div>
+            )}
+
+            {/* Link si existe */}
+            {item.url && (
+              <a
+                href={item.url}
+                className="absolute inset-0 z-10"
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            )}
+          </div>
         </div>
       ))}
     </div>
