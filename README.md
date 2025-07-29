@@ -11,7 +11,7 @@ Una aplicación web moderna construida con **Astro**, **React** y **Tailwind CSS
 
 ## 📸 Vista Previa
 
-![Captura de la página web](./public/screenshot.png)
+![Captura de la página web](./public/Screenshot_25.png)
 
 *Vista principal de la aplicación mostrando el layout responsivo con carousel, información del equipo y galería de integrantes*
 
