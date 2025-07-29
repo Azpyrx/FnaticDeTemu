@@ -1,7 +1,14 @@
 ---
 import '../styles/global.css';
+
 // Component Imports
-import Button from '../components/Button.astro';
+import { NavigationMenuDemo } from '@/components/NavigationMenuDemo';
+import Landing from '@/components/Landing.astro';
+import Main from '@/components/Main.astro';
+// import { NavigationMenuDemo } from './NavigationMenuDemo.tsx';
+// Uncomment and update the path below if the file exists elsewhere:
+// import { NavigationMenuDemo } from '../components/NavigationMenuDemo.tsx';
+
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
@@ -13,13 +20,13 @@ import Button from '../components/Button.astro';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro + TailwindCSS</title>
 	</head>
 
 	<body>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
+		<div class="top-0 left-0 w-full h-full bg-white from-gray-100 to-white dark:from-gray-900 dark:to-gray-800">
+			<NavigationMenuDemo client:load />
+			<Landing/>
+			<Main class="h-[90vh]" client:load/>
 		</div>
 	</body>
 </html>

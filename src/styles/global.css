@@ -1,1 +1,72 @@
 @import "tailwindcss";
+
+@theme {
+  --radius: 0.625rem;
+  
+  /* Colores personalizados de Fnatic */
+  --color-fnatic-orange: #ff6600;
+  --color-fnatic-black: #000000;
+  
+  /* Sistema de colores */
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.147 0.004 49.25);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.147 0.004 49.25);
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.147 0.004 49.25);
+  --color-primary: oklch(0.216 0.006 56.043);
+  --color-primary-foreground: oklch(0.985 0.001 106.423);
+  --color-secondary: oklch(0.97 0.001 106.424);
+  --color-secondary-foreground: oklch(0.216 0.006 56.043);
+  --color-muted: oklch(0.97 0.001 106.424);
+  --color-muted-foreground: oklch(0.553 0.013 58.071);
+  --color-accent: oklch(0.97 0.001 106.424);
+  --color-accent-foreground: oklch(0.216 0.006 56.043);
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-border: oklch(0.923 0.003 48.717);
+  --color-input: oklch(0.923 0.003 48.717);
+  --color-ring: oklch(0.709 0.01 56.259);
+}
+
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-background: oklch(0.147 0.004 49.25);
+    --color-foreground: oklch(0.985 0.001 106.423);
+    --color-card: oklch(0.216 0.006 56.043);
+    --color-card-foreground: oklch(0.985 0.001 106.423);
+    --color-popover: oklch(0.216 0.006 56.043);
+    --color-popover-foreground: oklch(0.985 0.001 106.423);
+    --color-primary: oklch(0.923 0.003 48.717);
+    --color-primary-foreground: oklch(0.216 0.006 56.043);
+    --color-secondary: oklch(0.268 0.007 34.298);
+    --color-secondary-foreground: oklch(0.985 0.001 106.423);
+    --color-muted: oklch(0.268 0.007 34.298);
+    --color-muted-foreground: oklch(0.709 0.01 56.259);
+    --color-accent: oklch(0.268 0.007 34.298);
+    --color-accent-foreground: oklch(0.985 0.001 106.423);
+    --color-destructive: oklch(0.704 0.191 22.216);
+    --color-border: oklch(0.268 0.007 34.298);
+    --color-input: oklch(0.268 0.007 34.298);
+    --color-ring: oklch(0.553 0.013 58.071);
+  }
+}
+
+/* Animaciones personalizadas */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Utilidades personalizadas */
+.lanyard-card {
+  animation: float 3s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.lanyard-card:hover {
+  transform: translateY(-2px) scale(1.02);
+}
