@@ -9,6 +9,14 @@ Una aplicación web moderna construida con **Astro**, **React** y **Tailwind CSS
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3.0-38B2AC?logo=tailwindcss)
 
+## 📸 Vista Previa
+
+![Captura de la página web](./public/screenshot.png)
+
+*Vista principal de la aplicación mostrando el layout responsivo con carousel, información del equipo y galería de integrantes*
+
+
+
 ## 🌟 Características
 
 ### ✨ **Diseño Moderno e Interactivo**
