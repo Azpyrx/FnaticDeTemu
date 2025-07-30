@@ -75,7 +75,7 @@ const items = [
   },
   {
     id: "2",
-    img: "/public/Sinag.jpg",
+    img: "/Sinag.jpg",
     url: "https://www.twitch.tv/sinag",
     height: 400,
     playerInfo: {
@@ -87,7 +87,7 @@ const items = [
   },
   {
     id: "3",
-    img: "/src/assets/Mathi.webp",
+    img: "/Mathi.webp",
     url: "https://example.com/three",
     height: 350,
     playerInfo: {
@@ -99,7 +99,7 @@ const items = [
   },
   {
     id: "4",
-    img: "/src/assets/Yeremi.png",
+    img: "/Yeremi.png",
     url: "https://example.com/four",
     height: 450,
     playerInfo: {
@@ -111,7 +111,7 @@ const items = [
   },
   {
     id: "5",
-    img: "/src/assets/Drakesin.webp",
+    img: "/Drakesin.webp",
     url: "https://example.com/five",
     height: 500,
     playerInfo: {
@@ -123,7 +123,7 @@ const items = [
   },
   {
     id: "6",
-    img: "/src/assets/Tryndamere.jpg",
+    img: "/Tryndamere.jpg",
     url: "https://example.com/five",
     height: 500,
     playerInfo: {
