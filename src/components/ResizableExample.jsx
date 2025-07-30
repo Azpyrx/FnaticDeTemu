@@ -11,12 +11,61 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import Masonry from '@/components/ui/masonry'
+import { useState, useEffect } from 'react'
+
+// Array de banners para fácil mantenimiento
+const banners = [
+  {
+    id: 1,
+    src: "/Ashe.jpg",
+    alt: "Ashe",
+    title: "Ashe",
+    subtitle: "The Frost Archer"
+  },
+  {
+    id: 2,
+    src: "/Tryndamere.webp",
+    alt: "Tryndamere", 
+    title: "Tryndamere",
+    subtitle: "The Barbarian King"
+  },
+  {
+    id: 3,
+    src: "/Jinx.jpg",
+    alt: "Jinx",
+    title: "Jinx", 
+    subtitle: "The Loose Cannon"
+  },
+  {
+    id: 4,
+    src: "/Draven.jpg",
+    alt: "Draven",
+    title: "Draven",
+    subtitle: "The Glorious Executioner"
+  },
+  {
+    id: 5,
+    src: "/Zilean.jpg",
+    alt: "Zilean",
+    title: "Zilean",
+    subtitle: "The Chronokeeper"
+  },
+  // Agregar más banners aquí es súper fácil:
+  // {
+  //   id: 5,
+  //   src: "/Yasuo.jpg",
+  //   alt: "Yasuo",
+  //   title: "Yasuo",
+  //   subtitle: "The Unforgiven"
+  // },
+]
 
 const items = [
   {
     id: "1",
     img: "https://preview.redd.it/vs4nqxqekxw31.png?auto=webp&s=d63485c8b4723928cae1228dc8aa33602cbd92c6",
-    height: 250,
+    url: "https://www.op.gg/summoners/euw/Azpy-1337",
+    height: 400,
     playerInfo: {
       name: "Azpy#1337",
       role: "ADC",
@@ -26,92 +75,233 @@ const items = [
   },
   {
     id: "2",
-    img: "https://picsum.photos/id/1011/600/750?grayscale",
-    url: "https://example.com/two",
-    height: 250,
+    img: "/src/assets/Sinag.jpg",
+    url: "https://www.twitch.tv/sinag",
+    height: 400,
     playerInfo: {
-      name: "ShadowJungle",
-      role: "Jungle",
-      rank: "Platinum I",
-      description: "Especialista en objetivos y ganks"
+      name: "Sinag",
+      role: "Coach",
+      rank: "Challenger",
+      description: "Le pone azúcar al mate"
     }
   },
   {
     id: "3",
-    img: "https://picsum.photos/id/1020/600/800?grayscale",
+    img: "/src/assets/Mathi.webp",
     url: "https://example.com/three",
-    height: 600,
+    height: 350,
     playerInfo: {
-      name: "MidLaneKing",
-      role: "Mid",
-      rank: "Diamond III",
-      description: "Carry del equipo y roamer"
+      name: "melon pan#7027",
+      role: "Support",
+      rank: "Diamond IV",
+      description: "Dice que se puede flashear la ulti del Karthus"
     }
   },
   {
     id: "4",
-    img: "https://picsum.photos/id/1018/600/400?grayscale",
+    img: "/src/assets/Yeremi.png",
     url: "https://example.com/four",
-    height: 300,
+    height: 450,
     playerInfo: {
-      name: "TopTank",
-      role: "Top",
-      rank: "Platinum II",
-      description: "Tanque principal y engager"
+      name: "FNT Uma Jam#TEMU",
+      role: "ADC",
+      rank: "Master",
+      description: "Juega Draven creemos que es bueno"
     }
   },
   {
     id: "5",
-    img: "https://picsum.photos/id/1025/600/700?grayscale",
+    img: "/src/assets/Drakesin.webp",
     url: "https://example.com/five",
     height: 500,
     playerInfo: {
-      name: "SupportGod",
-      role: "Support",
-      rank: "Diamond I",
-      description: "Visionado y protección del equipo"
+      name: "FNT Drakesin#FNT",
+      role: "Jungla",
+      rank: "Master",
+      description: "Firstpickeamos mid va va"
     }
-  }
+  },
+  {
+    id: "6",
+    img: "/src/assets/Tryndamere.jpg",
+    url: "https://example.com/five",
+    height: 500,
+    playerInfo: {
+      name: "FNT Tryndamere#FNT",
+      role: "Top",
+      rank: "Diamante",
+      description: "CEO, dueño, presidente y fundador de Fnatic de Temu"
+    }
+  },
+  {
+    id: "7",
+    img: "/src/assets/Tryndamere.jpg",
+    url: "https://example.com/five",
+    height: 500,
+    playerInfo: {
+      name: "FNT Shehu#FNT",
+      role: "Coach",
+      rank: "Master",
+      description: "Coach del equipo principal y fan de Merlí"
+    }
+  },
 ]
 
 export default function Example() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Componente reutilizable para renderizar banners
+  const BannerCarousel = ({ showOverlay = false, className = "" }) => (
+    <Carousel className={`w-full h-full ${className}`}>
+      <CarouselContent className="h-full">
+        {banners.map((banner) => (
+          <CarouselItem key={banner.id} className="h-full relative">
+            <img
+              src={banner.src}
+              alt={banner.alt}
+              className="w-full h-full object-cover object-center" 
+            />
+            {showOverlay && (
+              <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 sm:opacity-0 transition-opacity duration-300 flex items-end">
+                <div className="p-2 sm:p-4 text-white w-full">
+                  <h3 className="text-sm sm:text-lg font-bold">{banner.title}</h3>
+                  <p className="text-xs sm:text-sm">{banner.subtitle}</p>
+                </div>
+              </div>
+            )}
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      
+      {/* Controles adaptativos */}
+      <CarouselPrevious className={`absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white border-none rounded-full ${
+        showOverlay ? 'h-8 w-8 sm:h-10 sm:w-10' : 'h-10 w-10'
+      }`} />
+      <CarouselNext className={`absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white border-none rounded-full ${
+        showOverlay ? 'h-8 w-8 sm:h-10 sm:w-10' : 'h-10 w-10'
+      }`} />
+    </Carousel>
+  )
+
+  // Layout para móviles - Todo vertical
+  if (isMobile) {
+    return (
+      <div className="w-full min-h-screen p-2 sm:p-4 space-y-4">
+        {/* Carousel de banners - Mejorado para móvil */}
+        <div className="relative h-48 sm:h-64 md:h-80 bg-gradient-to-br from-green-100 to-blue-100 rounded-lg overflow-hidden">
+          <BannerCarousel showOverlay={true} />
+        </div>
+
+        {/* Información del equipo - Mejorada para móvil */}
+        <div className="bg-gradient-to-br from-orange-50 via-white to-orange-100 rounded-lg p-3 sm:p-4 shadow-inner">
+          {/* Header principal */}
+          <div className="text-center mb-4 sm:mb-6">
+            <h1 className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-500 mb-2 sm:mb-3">
+              ¿Quiénes somos?
+            </h1>
+            <div className="w-12 sm:w-16 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto rounded-full"></div>
+          </div>
+
+          {/* Intro compacta */}
+          <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-white/70 backdrop-blur-sm rounded-lg border border-orange-200">
+            <p className="text-xs sm:text-sm leading-relaxed text-gray-700">
+              ¡Bienvenido/a a <span className="font-bold text-orange-600">Fnatic de Temu</span>!
+              Somos una comunidad apasionada por los esports y especialmente por <span className="text-red-600 font-bold">League of Legends</span>.
+            </p>
+          </div>
+
+          {/* Valores compactos */}
+          <div className="mb-4 sm:mb-6">
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <span className="text-lg sm:text-xl">📌</span>
+              <h2 className="text-base sm:text-lg font-bold text-gray-800">Nuestros Valores</h2>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg border-l-4 border-orange-400">
+                <span className="text-sm sm:text-lg">🛡️</span>
+                <div>
+                  <h3 className="font-bold text-orange-700 text-xs sm:text-sm">Honor y Respeto</h3>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-red-50 to-pink-50 rounded-lg border-l-4 border-red-400">
+                <span className="text-sm sm:text-lg">🔥</span>
+                <div>
+                  <h3 className="font-bold text-red-700 text-xs sm:text-sm">Disciplina y Constancia</h3>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-l-4 border-blue-400">
+                <span className="text-sm sm:text-lg">🚀</span>
+                <div>
+                  <h3 className="font-bold text-blue-700 text-xs sm:text-sm">Competitividad Sana</h3>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg border-l-4 border-pink-400">
+                <span className="text-sm sm:text-lg">💖</span>
+                <div>
+                  <h3 className="font-bold text-pink-700 text-xs sm:text-sm">Compromiso y Pasión</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action compacto */}
+          <div className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-red-500 to-yellow-500 rounded-xl p-3 sm:p-4 text-white">
+            <div className="relative z-10 text-center">
+              <div className="text-xl sm:text-2xl mb-2">🔥</div>
+              <h3 className="text-sm sm:text-lg font-black mb-2 text-yellow-200">
+                ¿Te identificas con nuestros valores?
+              </h3>
+              
+              <p className="text-xs sm:text-sm mb-3">
+                Entonces <span className="text-yellow-300 font-bold">Fnatic de Temu</span> es tu lugar.
+              </p>
+
+              <button className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 rounded-full shadow-lg">
+                <a href="https://discord.gg/A68XyCQVHQ" className="flex items-center justify-center">
+                  ⚔️ ¡Únete! ✨
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Integrantes */}
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-3 sm:p-4">
+          <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-3 sm:mb-4 text-center">Integrantes</h3>
+          <Masonry
+            items={items}
+            scaleOnHover={true}
+            hoverScale={1.02}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  // Layout para desktop
   return (
     <div className="w-full h-[260vh] p-4 md:p-8 lg:p-12 mt-4 md:mt-8 rounded-lg shadow-lg">
       <ResizablePanelGroup direction="vertical" className="w-full h-full">
         
-        {/* Panel superior ANCHO - Carousel de los 3 banners */}
+        {/* Panel superior ANCHO - Carousel de banners */}
         <ResizablePanel defaultSize={35}>
           <div className="group relative h-full bg-gradient-to-br from-green-100 to-blue-100 rounded-lg m-2 overflow-hidden cursor-pointer">
-            <Carousel className="w-full h-full">
-              <CarouselContent className="h-full">
-                <CarouselItem className="h-full">
-                  <img
-                    src="/Ashe.jpg"
-                    alt="Ashe"
-                    className="w-full h-full object-cover" />
-                </CarouselItem>
-                <CarouselItem className="h-full">
-                  <div className="h-full">
-                    <img
-                      src="/Tryndamere.webp"
-                      alt="Tryndamere"
-                      className="w-full h-full object-cover" />
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="h-full">
-                  <div className="h-full">
-                    <img
-                      src="/Jinx.jpg"
-                      alt="Jinx"
-                      className="w-full h-full object-cover" />
-                  </div>
-                </CarouselItem>
-              </CarouselContent>
-
-              {/* Flechas centradas verticalmente */}
-              <CarouselPrevious className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white border-none h-10 w-10 rounded-full" />
-              <CarouselNext className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white border-none h-10 w-10 rounded-full" />
-            </Carousel>
+            <BannerCarousel />
           </div>
         </ResizablePanel>
 

@@ -5,28 +5,38 @@ import '../styles/global.css';
 import { NavigationMenuDemo } from '@/components/NavigationMenuDemo';
 import Landing from '@/components/Landing.astro';
 import Main from '@/components/Main.astro';
-// import { NavigationMenuDemo } from './NavigationMenuDemo.tsx';
-// Uncomment and update the path below if the file exists elsewhere:
-// import { NavigationMenuDemo } from '../components/NavigationMenuDemo.tsx';
-
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-	</head>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        
+        <!-- Aquí puedes editar el título y otros metadatos -->
+        <title>Fnatic de Temu - Comunidad League of Legends</title>
+        <meta name="description" content="Únete a la comunidad competitiva de League of Legends más apasionada. Honor, respeto, disciplina y pasión por los esports." />
+        <meta name="keywords" content="League of Legends, LoL, esports, comunidad, Fnatic, gaming, competitivo" />
+        
+        <!-- Open Graph para redes sociales -->
+        <meta property="og:title" content="Fnatic de Temu - Comunidad LoL" />
+        <meta property="og:description" content="La comunidad competitiva de League of Legends donde honor y pasión se encuentran" />
+        <meta property="og:image" content="/logoHeader.png" />
+        <meta property="og:type" content="website" />
+        
+        <!-- Twitter Cards -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Fnatic de Temu - Comunidad LoL" />
+        <meta name="twitter:description" content="Únete a nuestra comunidad competitiva de League of Legends" />
+        <meta name="twitter:image" content="/logoHeader.png" />
+    </head>
 
-	<body>
-		<div class="top-0 left-0 w-full h-full bg-white from-gray-100 to-white dark:from-gray-900 dark:to-gray-800">
-			<NavigationMenuDemo client:load />
-			<Landing/>
-			<Main class="h-[90vh]"/>
-		</div>
-	</body>
+    <body>
+        <div class="top-0 left-0 w-full h-full bg-white from-gray-100 to-white dark:from-gray-900 dark:to-gray-800">
+            <NavigationMenuDemo client:load />
+            <Landing/>
+            <Main class="h-[90vh]"/>
+        </div>
+    </body>
 </html>
