@@ -7,7 +7,7 @@ Una aplicación web moderna construida con **Astro**, **React** y **Tailwind CSS
 ![Preview](https://img.shields.io/badge/Status-Desplegado%20en%20Vercel-brightgreen)
 ![Astro](https://img.shields.io/badge/Astro-5.12-FF5D01?logo=astro)
 ![React](https://img.shields.io/badge/React-19.1-61DAFB?logo=react)
-![Tailwind](https://img.shields.io/badge/Tailwind-4.1-38B2AC?logo=tailwindcss)
+![Tailwind](https://img.shields.io/badge/Tailwind-3-38B2AC?logo=tailwindcss)
 ![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel)
 
 ## 📸 Vista Previa
