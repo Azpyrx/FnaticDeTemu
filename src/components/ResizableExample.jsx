@@ -13,53 +13,16 @@ import {
 import Masonry from '@/components/ui/masonry'
 import { useState, useEffect } from 'react'
 
-// Array de banners para fácil mantenimiento
+// Array de banners
 const banners = [
-  {
-    id: 1,
-    src: "/Ashe.jpg",
-    alt: "Ashe",
-    title: "Ashe",
-    subtitle: "The Frost Archer"
-  },
-  {
-    id: 2,
-    src: "/Tryndamere.webp",
-    alt: "Tryndamere", 
-    title: "Tryndamere",
-    subtitle: "The Barbarian King"
-  },
-  {
-    id: 3,
-    src: "/Jinx.jpg",
-    alt: "Jinx",
-    title: "Jinx", 
-    subtitle: "The Loose Cannon"
-  },
-  {
-    id: 4,
-    src: "/Draven.jpg",
-    alt: "Draven",
-    title: "Draven",
-    subtitle: "The Glorious Executioner"
-  },
-  {
-    id: 5,
-    src: "/Zilean.jpg",
-    alt: "Zilean",
-    title: "Zilean",
-    subtitle: "The Chronokeeper"
-  },
-  // Agregar más banners aquí es súper fácil:
-  // {
-  //   id: 5,
-  //   src: "/Yasuo.jpg",
-  //   alt: "Yasuo",
-  //   title: "Yasuo",
-  //   subtitle: "The Unforgiven"
-  // },
+  { id: 1, src: "/Ashe.jpg", alt: "Ashe" },
+  { id: 2, src: "/Tryndamere.webp", alt: "Tryndamere" },
+  { id: 3, src: "/Jinx.jpg", alt: "Jinx" },
+  { id: 4, src: "/Draven.jpg", alt: "Draven" },
+  { id: 5, src: "/Zilean.jpg", alt: "Zilean" }
 ]
 
+// Array de integrantes
 const items = [
   {
     id: "1",
@@ -124,7 +87,7 @@ const items = [
   {
     id: "6",
     img: "/Tryndamere.jpg",
-    url: "https://example.com/five",
+    url: "https://example.com/six",
     height: 500,
     playerInfo: {
       name: "FNT Tryndamere#FNT",
@@ -135,8 +98,8 @@ const items = [
   },
   {
     id: "7",
-    img: "/src/assets/Tryndamere.jpg",
-    url: "https://example.com/five",
+    img: "/Shehu.jpg", // ✅ CORREGIDO - quitar /src/assets/
+    url: "https://example.com/seven",
     height: 500,
     playerInfo: {
       name: "FNT Shehu#FNT",
@@ -144,313 +107,183 @@ const items = [
       rank: "Master",
       description: "Coach del equipo principal y fan de Merlí"
     }
+  }
+]
+
+// Datos de valores del equipo
+const valores = [
+  {
+    icon: "🛡️",
+    title: "Honor y Respeto",
+    description: "Competimos limpiamente, reconociendo el esfuerzo de todos",
+    gradient: "from-orange-50 to-red-50",
+    border: "border-orange-400"
   },
+  {
+    icon: "🔥",
+    title: "Disciplina y Constancia", 
+    description: "El éxito es fruto del esfuerzo constante y la dedicación",
+    gradient: "from-red-50 to-pink-50",
+    border: "border-red-400"
+  },
+  {
+    icon: "🚀",
+    title: "Competitividad Sana",
+    description: "Buscamos la excelencia con mentalidad abierta y humilde",
+    gradient: "from-blue-50 to-purple-50", 
+    border: "border-blue-400"
+  },
+  {
+    icon: "💖",
+    title: "Compromiso y Pasión",
+    description: "Nos mueve el amor genuino por el juego y la comunidad",
+    gradient: "from-pink-50 to-purple-50",
+    border: "border-pink-400"
+  }
 ]
 
 export default function Example() {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024)
-    }
-    
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
     checkMobile()
     window.addEventListener('resize', checkMobile)
-    
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Componente reutilizable para renderizar banners
-  const BannerCarousel = ({ showOverlay = false, className = "" }) => (
-    <Carousel className={`w-full h-full ${className}`}>
+  // Componente Carousel simplificado
+  const BannerCarousel = () => (
+    <Carousel className="w-full h-full">
       <CarouselContent className="h-full">
         {banners.map((banner) => (
-          <CarouselItem key={banner.id} className="h-full relative">
+          <CarouselItem key={banner.id} className="h-full">
             <img
               src={banner.src}
               alt={banner.alt}
-              className="w-full h-full object-cover object-center" 
+              className="w-full h-full object-cover" 
             />
-            {showOverlay && (
-              <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 sm:opacity-0 transition-opacity duration-300 flex items-end">
-                <div className="p-2 sm:p-4 text-white w-full">
-                  <h3 className="text-sm sm:text-lg font-bold">{banner.title}</h3>
-                  <p className="text-xs sm:text-sm">{banner.subtitle}</p>
-                </div>
-              </div>
-            )}
           </CarouselItem>
         ))}
       </CarouselContent>
-      
-      {/* Controles adaptativos */}
-      <CarouselPrevious className={`absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white border-none rounded-full ${
-        showOverlay ? 'h-8 w-8 sm:h-10 sm:w-10' : 'h-10 w-10'
-      }`} />
-      <CarouselNext className={`absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white border-none rounded-full ${
-        showOverlay ? 'h-8 w-8 sm:h-10 sm:w-10' : 'h-10 w-10'
-      }`} />
+      <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white border-none rounded-full h-10 w-10" />
+      <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white border-none rounded-full h-10 w-10" />
     </Carousel>
   )
 
-  // Layout para móviles - Todo vertical
+  // Componente de Información del Equipo
+  const TeamInfo = ({ isMobile = false }) => (
+    <div className={`bg-gradient-to-br from-orange-50 via-white to-orange-100 rounded-lg ${isMobile ? 'p-3 sm:p-4' : 'p-8'} shadow-inner overflow-y-auto`}>
+      {/* Header */}
+      <div className="text-center mb-6">
+        <h1 className={`font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-500 mb-3 ${isMobile ? 'text-xl sm:text-2xl' : 'text-4xl'}`}>
+          ¿Quiénes somos?
+        </h1>
+        <div className={`bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto rounded-full h-1 ${isMobile ? 'w-12 sm:w-16' : 'w-24'}`}></div>
+      </div>
+
+      {/* Intro */}
+      <div className={`mb-6 p-4 bg-white/70 backdrop-blur-sm rounded-lg border border-orange-200 ${!isMobile && 'hover:shadow-lg hover:scale-101 transition-all duration-300'}`}>
+        <p className={`leading-relaxed text-gray-700 ${isMobile ? 'text-xs sm:text-sm' : 'text-lg'}`}>
+          ¡Bienvenido/a a <span className="font-bold text-orange-600">Fnatic de Temu</span>!
+          Somos una comunidad apasionada por los esports y especialmente por <span className="text-red-600 font-bold">League of Legends</span>.
+          {!isMobile && " Nuestra misión es impulsar el desarrollo competitivo y personal de cada miembro. 🔥"}
+        </p>
+      </div>
+
+      {/* Valores */}
+      <div className="mb-6">
+        <div className={`flex items-center gap-2 mb-3 ${!isMobile && 'hover:translate-x-1 transition-transform duration-300'}`}>
+          <span className={isMobile ? 'text-lg sm:text-xl' : 'text-2xl'}>📌</span>
+          <h2 className={`font-bold text-gray-800 ${isMobile ? 'text-base sm:text-lg' : 'text-xl'}`}>Nuestros Valores</h2>
+        </div>
+
+        <div className={`space-y-2 ${!isMobile && 'ml-6'}`}>
+          {valores.map((valor, index) => (
+            <div key={index} className={`group flex items-center gap-2 p-2 bg-gradient-to-r ${valor.gradient} rounded-lg border-l-4 ${valor.border} ${!isMobile && 'hover:translate-x-2 hover:scale-101 transition-all duration-300 cursor-pointer'}`}>
+              <span className={`${!isMobile && 'group-hover:scale-110 transition-transform'} ${isMobile ? 'text-sm sm:text-lg' : 'text-xl'}`}>{valor.icon}</span>
+              <div>
+                <h3 className={`font-bold ${isMobile ? 'text-xs sm:text-sm' : 'text-base'}`}>{valor.title}</h3>
+                {!isMobile && <p className="text-gray-600 text-sm">{valor.description}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className={`relative overflow-hidden bg-gradient-to-br from-orange-600 via-red-500 to-yellow-500 rounded-xl text-white shadow-xl ${isMobile ? 'p-3 sm:p-4' : 'p-6 hover:scale-102 transition-all duration-300 cursor-pointer'}`}>
+        <div className="relative z-10 text-center">
+          <div className={`mb-2 ${isMobile ? 'text-xl sm:text-2xl' : 'text-4xl'}`}>🔥</div>
+          <h3 className={`font-black mb-2 text-yellow-200 ${isMobile ? 'text-sm sm:text-lg' : 'text-2xl'}`}>
+            ¿Te identificas con nuestros valores?
+          </h3>
+          <p className={`font-semibold mb-3 ${isMobile ? 'text-xs sm:text-sm' : 'text-lg'}`}>
+            Entonces <span className="text-yellow-300 font-bold">Fnatic de Temu</span> es tu lugar.
+          </p>
+          <button className={`bg-yellow-400 hover:bg-yellow-300 text-black font-bold rounded-full shadow-lg transition-all duration-300 ${isMobile ? 'text-xs sm:text-sm px-4 sm:px-6 py-2' : 'text-lg px-8 py-3 hover:scale-105'}`}>
+            <a href="https://discord.gg/A68XyCQVHQ" className="flex items-center justify-center">
+              ⚔️ ¡{isMobile ? 'Únete' : 'Te esperamos'}! ✨
+            </a>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+
+  // Layout móvil
   if (isMobile) {
     return (
       <div className="w-full min-h-screen p-2 sm:p-4 space-y-4">
-        {/* Carousel de banners - Mejorado para móvil */}
+        {/* Carousel */}
         <div className="relative h-48 sm:h-64 md:h-80 bg-gradient-to-br from-green-100 to-blue-100 rounded-lg overflow-hidden">
-          <BannerCarousel showOverlay={true} />
+          <BannerCarousel />
         </div>
-
-        {/* Información del equipo - Mejorada para móvil */}
-        <div className="bg-gradient-to-br from-orange-50 via-white to-orange-100 rounded-lg p-3 sm:p-4 shadow-inner">
-          {/* Header principal */}
-          <div className="text-center mb-4 sm:mb-6">
-            <h1 className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-500 mb-2 sm:mb-3">
-              ¿Quiénes somos?
-            </h1>
-            <div className="w-12 sm:w-16 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto rounded-full"></div>
-          </div>
-
-          {/* Intro compacta */}
-          <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-white/70 backdrop-blur-sm rounded-lg border border-orange-200">
-            <p className="text-xs sm:text-sm leading-relaxed text-gray-700">
-              ¡Bienvenido/a a <span className="font-bold text-orange-600">Fnatic de Temu</span>!
-              Somos una comunidad apasionada por los esports y especialmente por <span className="text-red-600 font-bold">League of Legends</span>.
-            </p>
-          </div>
-
-          {/* Valores compactos */}
-          <div className="mb-4 sm:mb-6">
-            <div className="flex items-center gap-2 mb-2 sm:mb-3">
-              <span className="text-lg sm:text-xl">📌</span>
-              <h2 className="text-base sm:text-lg font-bold text-gray-800">Nuestros Valores</h2>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg border-l-4 border-orange-400">
-                <span className="text-sm sm:text-lg">🛡️</span>
-                <div>
-                  <h3 className="font-bold text-orange-700 text-xs sm:text-sm">Honor y Respeto</h3>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-red-50 to-pink-50 rounded-lg border-l-4 border-red-400">
-                <span className="text-sm sm:text-lg">🔥</span>
-                <div>
-                  <h3 className="font-bold text-red-700 text-xs sm:text-sm">Disciplina y Constancia</h3>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-l-4 border-blue-400">
-                <span className="text-sm sm:text-lg">🚀</span>
-                <div>
-                  <h3 className="font-bold text-blue-700 text-xs sm:text-sm">Competitividad Sana</h3>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 p-2 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg border-l-4 border-pink-400">
-                <span className="text-sm sm:text-lg">💖</span>
-                <div>
-                  <h3 className="font-bold text-pink-700 text-xs sm:text-sm">Compromiso y Pasión</h3>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Call to Action compacto */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-red-500 to-yellow-500 rounded-xl p-3 sm:p-4 text-white">
-            <div className="relative z-10 text-center">
-              <div className="text-xl sm:text-2xl mb-2">🔥</div>
-              <h3 className="text-sm sm:text-lg font-black mb-2 text-yellow-200">
-                ¿Te identificas con nuestros valores?
-              </h3>
-              
-              <p className="text-xs sm:text-sm mb-3">
-                Entonces <span className="text-yellow-300 font-bold">Fnatic de Temu</span> es tu lugar.
-              </p>
-
-              <button className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 rounded-full shadow-lg">
-                <a href="https://discord.gg/A68XyCQVHQ" className="flex items-center justify-center">
-                  ⚔️ ¡Únete! ✨
-                </a>
-              </button>
-            </div>
-          </div>
-        </div>
-
+        
+        {/* Info del equipo */}
+        <TeamInfo isMobile={true} />
+        
         {/* Integrantes */}
         <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-3 sm:p-4">
           <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-3 sm:mb-4 text-center">Integrantes</h3>
-          <Masonry
-            items={items}
-            scaleOnHover={true}
-            hoverScale={1.02}
-          />
+          <Masonry items={items} scaleOnHover={true} hoverScale={1.02} />
         </div>
       </div>
     )
   }
 
-  // Layout para desktop
+  // Layout desktop
   return (
     <div className="w-full h-[260vh] p-4 md:p-8 lg:p-12 mt-4 md:mt-8 rounded-lg shadow-lg">
       <ResizablePanelGroup direction="vertical" className="w-full h-full">
         
-        {/* Panel superior ANCHO - Carousel de banners */}
+        {/* Panel superior - Carousel */}
         <ResizablePanel defaultSize={35}>
-          <div className="group relative h-full bg-gradient-to-br from-green-100 to-blue-100 rounded-lg m-2 overflow-hidden cursor-pointer">
+          <div className="h-full bg-gradient-to-br from-green-100 to-blue-100 rounded-lg m-2 overflow-hidden">
             <BannerCarousel />
           </div>
         </ResizablePanel>
 
         <ResizableHandle className="bg-transparent border-none" />
 
-        {/* Panel inferior dividido horizontalmente */}
+        {/* Panel inferior */}
         <ResizablePanel defaultSize={65}>
           <ResizablePanelGroup direction="horizontal" className="h-full">
             
-            {/* Panel izquierdo - ¿Quiénes somos? */}
+            {/* Panel izquierdo - Info del equipo */}
             <ResizablePanel defaultSize={50}>
-              <div className="h-full bg-gradient-to-br from-orange-50 via-white to-orange-100 rounded-lg m-2 p-8 overflow-y-auto shadow-inner">
-
-                {/* Header principal animado */}
-                <div className="text-center mb-8 transform hover:scale-102 transition-all duration-300">
-                    <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-500 mb-4">
-                        ¿Quiénes somos?
-                    </h1>
-                    <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto rounded-full"></div>
-                </div>
-
-                {/* Intro compacta */}
-                <div className="mb-8 p-6 bg-white/70 backdrop-blur-sm rounded-lg border border-orange-200 shadow-sm hover:shadow-lg hover:scale-101 transition-all duration-300">
-                    <p className="text-lg leading-relaxed text-gray-700">
-                        ¡Bienvenido/a a <span className="font-bold text-orange-600">Fnatic de Temu</span>!
-                        Somos una comunidad apasionada por los esports y especialmente por <span className="text-red-600 font-bold">League of Legends</span>.
-                        Nuestra misión es impulsar el desarrollo competitivo y personal de cada miembro. 🔥
-                    </p>
-                </div>
-
-                {/* Sección Familia */}
-                <div className="mb-6">
-                    <div className="flex items-center gap-3 mb-3 hover:translate-x-1 transition-transform duration-300">
-                        <span className="text-2xl">🌟</span>
-                        <h2 className="text-xl font-bold text-gray-800">Una Familia Competitiva</h2>
-                    </div>
-                    <p className="text-gray-600 ml-8 text-sm italic">
-                        En Fnatic de Temu no solo jugamos; construimos relaciones y crecemos juntos.
-                    </p>
-                </div>
-
-                {/* Valores compactos con animaciones suaves */}
-                <div className="mb-8">
-                    <div className="flex items-center gap-3 mb-4 hover:translate-x-1 transition-transform duration-300">
-                        <span className="text-2xl">📌</span>
-                        <h2 className="text-xl font-bold text-gray-800">Nuestros Valores</h2>
-                    </div>
-
-                    <div className="space-y-3 ml-6">
-                        {/* Valor 1 */}
-                        <div className="group flex items-center gap-3 p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg border-l-4 border-orange-400 hover:border-orange-600 transform hover:translate-x-2 hover:scale-101 transition-all duration-300 cursor-pointer">
-                            <span className="text-xl group-hover:scale-110 transition-transform">🛡️</span>
-                            <div>
-                                <h3 className="font-bold text-orange-700 group-hover:text-orange-900">Honor y Respeto</h3>
-                                <p className="text-gray-600 text-sm">Competimos limpiamente, reconociendo el esfuerzo de todos</p>
-                            </div>
-                        </div>
-
-                        {/* Valor 2 */}
-                        <div className="group flex items-center gap-3 p-3 bg-gradient-to-r from-red-50 to-pink-50 rounded-lg border-l-4 border-red-400 hover:border-red-600 transform hover:translate-x-2 hover:scale-101 transition-all duration-300 cursor-pointer">
-                            <span className="text-xl group-hover:scale-110 transition-transform">🔥</span>
-                            <div>
-                                <h3 className="font-bold text-red-700 group-hover:text-red-900">Disciplina y Constancia</h3>
-                                <p className="text-gray-600 text-sm">El éxito es fruto del esfuerzo constante y la dedicación</p>
-                            </div>
-                        </div>
-
-                        {/* Valor 3 */}
-                        <div className="group flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-l-4 border-blue-400 hover:border-blue-600 transform hover:translate-x-2 hover:scale-101 transition-all duration-300 cursor-pointer">
-                            <span className="text-xl group-hover:scale-110 transition-transform">🚀</span>
-                            <div>
-                                <h3 className="font-bold text-blue-700 group-hover:text-blue-900">Competitividad Sana</h3>
-                                <p className="text-gray-600 text-sm">Buscamos la excelencia con mentalidad abierta y humilde</p>
-                            </div>
-                        </div>
-
-                        {/* Valor 4 */}
-                        <div className="group flex items-center gap-3 p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg border-l-4 border-pink-400 hover:border-pink-600 transform hover:translate-x-2 hover:scale-101 transition-all duration-300 cursor-pointer">
-                            <span className="text-xl group-hover:scale-110 transition-transform">💖</span>
-                            <div>
-                                <h3 className="font-bold text-pink-700 group-hover:text-pink-900">Compromiso y Pasión</h3>
-                                <p className="text-gray-600 text-sm">Nos mueve el amor genuino por el juego y la comunidad</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Call to Action balanceado */}
-                <div className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-red-500 to-yellow-500 rounded-xl p-6 text-white shadow-xl transform hover:scale-102 transition-all duration-300 cursor-pointer group">
-
-                    {/* Efectos de fondo sutiles */}
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all duration-300"></div>
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
-                    <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full -ml-10 -mb-10"></div>
-
-                    <div className="relative z-10">
-                        {/* Header impactante pero equilibrado */}
-                        <div className="text-center mb-4">
-                            <div className="text-4xl mb-2">🔥</div>
-                            <h3 className="text-2xl font-black mb-2 text-yellow-200 drop-shadow-lg">
-                              ¿Te identificas con nuestros valores?
-                            </h3>
-                            <div className="w-16 h-1 bg-yellow-300 mx-auto rounded-full"></div>
-                        </div>
-
-                        {/* Mensaje equilibrado */}
-                        <div className="text-center space-y-3">
-                            <p className="text-lg font-semibold">
-                              Entonces <span className="text-yellow-300 font-bold">Fnatic de Temu</span> es tu lugar.
-                            </p>
-
-                            <div className="bg-black/30 rounded-lg p-4 backdrop-blur-sm border border-yellow-400/30">
-                                <p className="text-xl font-bold text-yellow-200 mb-1">
-                                  ¡Únete a la aventura!
-                                </p>
-                                <p className="text-sm opacity-90">
-                                  Hagamos historia juntos en la <span className="text-yellow-300 font-bold">Grieta del Invocador</span>
-                                </p>
-                            </div>
-
-                            {/* Botón moderado */}
-                            <div className="pt-3">
-                                <button className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-lg px-8 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 border-yellow-200">
-                                    <a href="https://discord.gg/A68XyCQVHQ" className="flex items-center justify-center">⚔️ ¡Te esperamos! ✨</a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Brillo sutil */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 opacity-50"></div>
-                </div>
+              <div className="h-full m-2">
+                <TeamInfo />
               </div>
             </ResizablePanel>
 
             <ResizableHandle className="bg-transparent border-none" />
 
-            {/* Panel derecho - Masonry */}
+            {/* Panel derecho - Integrantes */}
             <ResizablePanel defaultSize={50}>
               <div className="h-full bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg m-2 p-4 overflow-y-auto">
                 <h3 className="text-lg font-bold text-gray-800 mb-4 text-center">Integrantes</h3>
-                
-                <div key="masonry-container">
-                  <Masonry
-                    items={items}
-                    scaleOnHover={true}
-                    hoverScale={1.05}
-                  />
-                </div>
+                <Masonry items={items} scaleOnHover={true} hoverScale={1.05} />
               </div>
             </ResizablePanel>
 

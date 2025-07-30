@@ -2,28 +2,18 @@
 // Landing page simple para video
 ---
 
+
 <section class="min-h-screen flex items-center justify-center">
   <div class="w-full">
     <!-- Contenedor del video - ahora ocupa todo el width -->
     <div class="relative w-full aspect-video overflow-hidden shadow-2xl">
-      <video 
-        class="w-full h-full object-cover" 
-        autoplay 
-        muted 
-        loop
-        poster="/video-thumbnail.jpg"
-      >
-        <source src="/landingLoL.mp4" type="video/mp4">
-        Tu navegador no soporta el elemento de video.
-      </video>
+      
 
       <!-- Div pequeño sobrepuesto - COMPLETAMENTE RESPONSIVE -->
       <div class="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-auto h-auto px-2 sm:px-4">
         <div class="bg-white/20 text-black p-2 sm:p-3 md:p-4 lg:p-6 rounded-lg opacity-70 shadow-lg backdrop-blur-md">
           <!-- Texto responsive simplificado -->
           <div class="text-center whitespace-nowrap">
-            <span class="font-bold text-yellow-500 text-lg sm:text-2xl md:text-4xl lg:text-6xl xl:text-8xl 2xl:text-9xl">FNATIC </span>
-            <span class="font-bold text-black text-lg sm:text-2xl md:text-4xl lg:text-6xl xl:text-8xl 2xl:text-9xl">De Temu</span>
           </div>
         </div>
       </div>

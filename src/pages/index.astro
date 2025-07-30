@@ -2,8 +2,7 @@
 import '../styles/global.css';
 
 // Component Imports
-import { NavigationMenuDemo } from '@/components/NavigationMenuDemo';
-import Landing from '@/components/Landing.astro';
+import { NavigationMenuDemo, LandingPage } from '@/components/NavigationMenuDemo';
 import Main from '@/components/Main.astro';
 ---
 
@@ -35,7 +34,7 @@ import Main from '@/components/Main.astro';
     <body>
         <div class="top-0 left-0 w-full h-full bg-white from-gray-100 to-white dark:from-gray-900 dark:to-gray-800">
             <NavigationMenuDemo client:load />
-            <Landing/>
+            <LandingPage client:load />
             <Main class="h-[90vh]"/>
         </div>
     </body>

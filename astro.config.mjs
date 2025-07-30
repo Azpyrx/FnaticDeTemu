@@ -12,5 +12,11 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ['@react-three/fiber', '@react-three/drei', '@react-three/rapier']
     }
+    
+  },
+ server: {
+    host: '0.0.0.0',  // 👈 Esto es clave
+    port: 4321,
+    open: false
   }
 });

@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import Iridescence from "./ui/Iridescence";
+import GradientText from "./ui/GradientText";
+import StickerPeel from './ui/StickerPeel';
+
 
 export function NavigationMenuDemo() {
   const [isEquiposOpen, setIsEquiposOpen] = useState(false);
@@ -259,24 +263,37 @@ export function LandingPage() {
       <div className="w-full">
         {/* Contenedor del video - ahora ocupa todo el width */}
         <div className="relative w-full aspect-video overflow-hidden shadow-2xl">
-          <video 
-            className="w-full h-full object-cover" 
-            autoPlay 
-            muted 
-            loop
-            poster="/video-thumbnail.jpg"
-          >
-            <source src="/landingLoL.mp4" type="video/mp4"/>
-            Tu navegador no soporta el elemento de video.
-          </video>
-
-          {/* Div pequeño sobrepuesto - COMPLETAMENTE RESPONSIVE */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-auto h-auto px-2 sm:px-4">
-            <div className="bg-white/20 text-black p-2 sm:p-3 md:p-4 lg:p-6 rounded-lg opacity-70 shadow-lg backdrop-blur-md">
-              {/* Texto responsive simplificado */}
-              <div className="text-center whitespace-nowrap">
-                <span className="font-bold text-yellow-500 text-lg sm:text-2xl md:text-4xl lg:text-6xl xl:text-8xl 2xl:text-9xl">FNATIC </span>
-                <span className="font-bold text-black text-lg sm:text-2xl md:text-4xl lg:text-6xl xl:text-8xl 2xl:text-9xl">De Temu</span>
+          <Iridescence 
+            className="absolute inset-0 w-full h-full"
+            color={[0.5, 0.6, 0.8]}
+            mouseReact={true}
+            amplitude={0.1}
+            speed={1.3}
+          />
+          
+          {/* Div del título - CENTRADO PERFECTAMENTE */}
+          <div className="absolute top-1/5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-auto h-auto px-4 sm:px-6 md:px-8">
+            <div className="bg-blue-800 text-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-lg shadow-lg backdrop-blur-md">
+              {/* Texto centrado */}
+              <div className="text-center whitespace-nowrap mb-4 sm:mb-6">
+                <GradientText>
+                  <span className="font-bold text-transparent text-2xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl 2xl:text-10xl">FNATIC DE TEMU</span>
+                </GradientText>
+              </div>
+              
+              {/* Logo del equipo en blanco y negro debajo del título */}
+              <div className="flex justify-end">
+                <StickerPeel
+                  imageSrc="/logoHeader.png"
+                  width={400}                
+                  rotate={15}                 
+                  peelBackHoverPct={25}
+                  peelBackActivePct={35}
+                  shadowIntensity={0.4}
+                  lightingIntensity={0.1}
+                  initialPosition='bottom-left'    
+                  className="filter grayscale opacity-90 hover:opacity-40 transition-opacity duration-300"
+                />
               </div>
             </div>
           </div>
