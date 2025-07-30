@@ -75,7 +75,7 @@ const items = [
   },
   {
     id: "2",
-    img: "/src/assets/Sinag.jpg",
+    img: "/public/Sinag.jpg",
     url: "https://www.twitch.tv/sinag",
     height: 400,
     playerInfo: {
@@ -116,7 +116,7 @@ const items = [
     height: 500,
     playerInfo: {
       name: "FNT Drakesin#FNT",
-      role: "Jungla",
+      role: "Jungle",
       rank: "Master",
       description: "Firstpickeamos mid va va"
     }
